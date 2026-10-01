@@ -1,1 +1,788 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#3157d5">
 
+<title>DersGO</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f4f7fc;
+  color:#172033;
+}
+
+button{
+  font:inherit;
+}
+
+.header{
+  background:linear-gradient(135deg,#3157d5,#6336c7);
+  color:white;
+  padding:24px 18px 30px;
+  border-radius:0 0 28px 28px;
+}
+
+.header h1{
+  margin:0;
+  font-size:29px;
+}
+
+.header p{
+  margin:7px 0 0;
+  opacity:.9;
+}
+
+.container{
+  max-width:800px;
+  margin:auto;
+  padding:18px;
+}
+
+.card{
+  background:white;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:15px;
+  box-shadow:0 5px 18px rgba(20,40,100,.08);
+}
+
+.title{
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:14px;
+}
+
+.profile-grid,
+.menu-grid,
+.subject-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.profile{
+  border:2px solid #e5e9f5;
+  background:white;
+  border-radius:18px;
+  padding:22px 10px;
+  text-align:center;
+  cursor:pointer;
+}
+
+.profile:hover{
+  border-color:#3157d5;
+}
+
+.profile .icon{
+  font-size:38px;
+  margin-bottom:8px;
+}
+
+.profile strong{
+  display:block;
+  font-size:18px;
+}
+
+.profile small{
+  color:#6b7280;
+}
+
+.menu{
+  border:0;
+  border-radius:16px;
+  background:#f2f5ff;
+  padding:18px 8px;
+  min-height:105px;
+  cursor:pointer;
+  color:#172033;
+}
+
+.menu .icon{
+  font-size:29px;
+  display:block;
+  margin-bottom:8px;
+}
+
+.menu strong{
+  font-size:14px;
+}
+
+.subject{
+  border:0;
+  border-radius:15px;
+  padding:17px 10px;
+  cursor:pointer;
+  font-weight:bold;
+  background:#f7f8fc;
+}
+
+.task{
+  padding:13px 0;
+  border-bottom:1px solid #edf0f5;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.task:last-child{
+  border-bottom:0;
+}
+
+.badge{
+  display:inline-block;
+  background:#e9eeff;
+  color:#3157d5;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+.progress{
+  background:#e8ecf5;
+  height:10px;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:10px;
+}
+
+.progress div{
+  height:100%;
+  background:#3157d5;
+  width:35%;
+}
+
+.back{
+  border:0;
+  background:#e9eeff;
+  color:#3157d5;
+  border-radius:12px;
+  padding:10px 14px;
+  margin-bottom:14px;
+  cursor:pointer;
+}
+
+.primary{
+  border:0;
+  background:#3157d5;
+  color:white;
+  padding:13px 18px;
+  border-radius:12px;
+  cursor:pointer;
+  width:100%;
+  margin-top:10px;
+}
+
+.empty{
+  color:#697386;
+  line-height:1.6;
+}
+
+.hidden{
+  display:none;
+}
+
+.student-name{
+  font-weight:bold;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  text-align:center;
+}
+
+.stat{
+  background:#f5f7fc;
+  border-radius:13px;
+  padding:12px 5px;
+}
+
+.stat strong{
+  display:block;
+  font-size:20px;
+  color:#3157d5;
+}
+
+.footer{
+  text-align:center;
+  color:#8a92a3;
+  padding:15px 10px 35px;
+  font-size:12px;
+}
+
+@media(max-width:400px){
+  .container{
+    padding:13px;
+  }
+
+  .menu{
+    min-height:95px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <h1>DersGO</h1>
+  <p id="headerText">
+    Kişisel öğrenme ve çalışma asistanın
+  </p>
+</header>
+
+<main class="container">
+
+<section id="profilePage">
+
+  <div class="card">
+    <div class="title">Kim çalışacak?</div>
+
+    <div class="profile-grid">
+
+      <button class="profile" onclick="selectStudent(3)">
+        <div class="icon">📘</div>
+        <strong>3. Sınıf</strong>
+        <small>Öğrenci Profili</small>
+      </button>
+
+      <button class="profile" onclick="selectStudent(6)">
+        <div class="icon">🎓</div>
+        <strong>6. Sınıf</strong>
+        <small>Öğrenci Profili</small>
+      </button>
+
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="title">Veli Alanı</div>
+    <p class="empty">
+      İki öğrencinin çalışma sürelerini, sınavlarını,
+      başarılarını ve eksik konularını buradan takip edebilirsiniz.
+    </p>
+
+    <button class="primary" onclick="openParent()">
+      Veli Panelini Aç
+    </button>
+  </div>
+
+</section>
+
+
+<section id="homePage" class="hidden">
+
+  <button class="back" onclick="goProfiles()">
+    ← Profil değiştir
+  </button>
+
+  <div class="card">
+    <span class="badge" id="classBadge"></span>
+
+    <h2>
+      Merhaba
+    </h2>
+
+    <p>
+      Bugünkü çalışmalarını tamamlamaya hazır mısın?
+    </p>
+
+    <div class="progress">
+      <div id="dailyProgress"></div>
+    </div>
+
+    <p>
+      <small>Bugünkü hedefinin %35'i tamamlandı.</small>
+    </p>
+  </div>
+
+
+  <div class="card">
+    <div class="title">Bugünkü Görevlerim</div>
+
+    <div class="task">
+      <span>Matematik konu tekrarı</span>
+      <span class="badge">20 dk</span>
+    </div>
+
+    <div class="task">
+      <span>Türkçe soru çözümü</span>
+      <span class="badge">15 dk</span>
+    </div>
+
+    <div class="task">
+      <span>Günlük tekrar</span>
+      <span class="badge">10 dk</span>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="title">Derslerim</div>
+
+    <div class="subject-grid" id="subjects"></div>
+  </div>
+
+
+  <div class="card">
+    <div class="title">Öğrenme Merkezi</div>
+
+    <div class="menu-grid">
+
+      <button class="menu" onclick="openFeature('Konu Çalış')">
+        <span class="icon">📖</span>
+        <strong>Konu Çalış</strong>
+      </button>
+
+      <button class="menu" onclick="openFeature('Konu Anlatım Videoları')">
+        <span class="icon">▶️</span>
+        <strong>Konu Videoları</strong>
+      </button>
+
+      <button class="menu" onclick="openFeature('Test Çöz')">
+        <span class="icon">📝</span>
+        <strong>Test Çöz</strong>
+      </button>
+
+      <button class="menu" onclick="openFeature('Eğitim Oyunları')">
+        <span class="icon">🎮</span>
+        <strong>Oyun Oyna</strong>
+      </button>
+
+      <button class="menu" onclick="openFeature('Sınava Hazırlan')">
+        <span class="icon">🎯</span>
+        <strong>Sınava Hazırlan</strong>
+      </button>
+
+      <button class="menu" onclick="openFeature('Yanlışlarım')">
+        <span class="icon">🔁</span>
+        <strong>Yanlışlarım</strong>
+      </button>
+
+      <button class="menu" onclick="openFeature('Başarılarım')">
+        <span class="icon">🏆</span>
+        <strong>Başarılarım</strong>
+      </button>
+
+      <button class="menu" onclick="openFeature('Ders Kitaplarım')">
+        <span class="icon">📚</span>
+        <strong>Ders Kitaplarım</strong>
+      </button>
+
+    </div>
+  </div>
+
+</section>
+
+
+<section id="featurePage" class="hidden">
+
+  <button class="back" onclick="goHome()">
+    ← Ana sayfa
+  </button>
+
+  <div class="card">
+    <div class="title" id="featureTitle"></div>
+
+    <div id="featureContent" class="empty"></div>
+  </div>
+
+</section>
+
+
+<section id="parentPage" class="hidden">
+
+  <button class="back" onclick="goProfiles()">
+    ← Geri
+  </button>
+
+  <div class="card">
+    <div class="title">Veli Paneli</div>
+
+    <p>
+      İki öğrencinin gelişim bilgileri burada görüntülenecek.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="title">3. Sınıf</div>
+
+    <div class="stats">
+      <div class="stat">
+        <strong>0</strong>
+        Soru
+      </div>
+
+      <div class="stat">
+        <strong>0</strong>
+        Test
+      </div>
+
+      <div class="stat">
+        <strong>0</strong>
+        XP
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="title">6. Sınıf</div>
+
+    <div class="stats">
+      <div class="stat">
+        <strong>0</strong>
+        Soru
+      </div>
+
+      <div class="stat">
+        <strong>0</strong>
+        Test
+      </div>
+
+      <div class="stat">
+        <strong>0</strong>
+        XP
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<div class="footer">
+  DersGO • Öğren • Uygula • Pekiştir
+</div>
+
+
+<script>
+
+let currentClass = null;
+
+const subjects = {
+
+  3:[
+    "Türkçe",
+    "Matematik",
+    "Hayat Bilgisi",
+    "Fen Bilimleri",
+    "İngilizce"
+  ],
+
+  6:[
+    "Türkçe",
+    "Matematik",
+    "Fen Bilimleri",
+    "Sosyal Bilgiler",
+    "İngilizce",
+    "Din Kültürü"
+  ]
+
+};
+
+
+function hideAll(){
+
+  document.getElementById("profilePage").classList.add("hidden");
+  document.getElementById("homePage").classList.add("hidden");
+  document.getElementById("featurePage").classList.add("hidden");
+  document.getElementById("parentPage").classList.add("hidden");
+
+}
+
+
+function selectStudent(classNumber){
+
+  currentClass = classNumber;
+
+  localStorage.setItem(
+    "dersgoStudent",
+    classNumber
+  );
+
+  hideAll();
+
+  document
+    .getElementById("homePage")
+    .classList.remove("hidden");
+
+  document.getElementById("classBadge").innerText =
+    classNumber + ". Sınıf";
+
+  document.getElementById("headerText").innerText =
+    classNumber + ". sınıf öğrenme merkezi";
+
+  loadSubjects();
+
+}
+
+
+function loadSubjects(){
+
+  const area =
+    document.getElementById("subjects");
+
+  area.innerHTML = "";
+
+  subjects[currentClass].forEach(subject=>{
+
+    const button =
+      document.createElement("button");
+
+    button.className = "subject";
+
+    button.innerText = subject;
+
+    button.onclick = function(){
+      openSubject(subject);
+    };
+
+    area.appendChild(button);
+
+  });
+
+}
+
+
+function openSubject(subject){
+
+  hideAll();
+
+  document
+    .getElementById("featurePage")
+    .classList.remove("hidden");
+
+  document.getElementById("featureTitle").innerText =
+    subject;
+
+  document.getElementById("featureContent").innerHTML = `
+
+    <p>
+      <b>${currentClass}. sınıf ${subject}</b>
+    </p>
+
+    <p>
+      Bu bölümde ders kitabındaki üniteler ve
+      konular yer alacak.
+    </p>
+
+    <button class="primary"
+      onclick="openFeature('Konu Çalış')">
+      Konu Çalış
+    </button>
+
+    <button class="primary"
+      onclick="openFeature('Konu Anlatım Videoları')">
+      Konu Anlatım Videosu
+    </button>
+
+    <button class="primary"
+      onclick="openFeature('Test Çöz')">
+      Test Çöz
+    </button>
+
+    <button class="primary"
+      onclick="openFeature('Eğitim Oyunları')">
+      Oyunla Pekiştir
+    </button>
+
+  `;
+
+}
+
+
+function openFeature(name){
+
+  hideAll();
+
+  document
+    .getElementById("featurePage")
+    .classList.remove("hidden");
+
+  document.getElementById("featureTitle").innerText =
+    name;
+
+  let content = "";
+
+  if(name === "Ders Kitaplarım"){
+
+    content = `
+
+      <p>
+        Ders kitaplarının PDF dosyalarını kullanacağımız
+        bölüm burası olacak.
+      </p>
+
+      <p>
+        Sonraki aşamada PDF → ünite → konu → test
+        sistemini buraya bağlayacağız.
+      </p>
+
+    `;
+
+  }
+
+  else if(name === "Konu Anlatım Videoları"){
+
+    content = `
+
+      <p>
+        Öğrencinin sınıfına, dersine ve konusuna uygun
+        konu anlatım videoları burada bulunacak.
+      </p>
+
+      <p>
+        Video bittikten sonra mini öğrenme testi
+        başlatılabilecek.
+      </p>
+
+    `;
+
+  }
+
+  else if(name === "Eğitim Oyunları"){
+
+    content = `
+
+      <p>
+        Ders konularına bağlı eğitim oyunları burada
+        bulunacak.
+      </p>
+
+      <p>
+        Doğru cevaplarla XP ve başarı puanı
+        kazanılabilecek.
+      </p>
+
+    `;
+
+  }
+
+  else if(name === "Sınava Hazırlan"){
+
+    content = `
+
+      <p>
+        Sınav tarihi ve sınav konuları girilecek.
+      </p>
+
+      <p>
+        DersGO kalan süreye göre günlük çalışma
+        programı oluşturacak.
+      </p>
+
+    `;
+
+  }
+
+  else if(name === "Yanlışlarım"){
+
+    content = `
+
+      <p>
+        Öğrencinin yanlış yaptığı sorular burada
+        saklanacak.
+      </p>
+
+      <p>
+        DersGO zorlanılan konuları tekrar çalışma
+        programına ekleyecek.
+      </p>
+
+    `;
+
+  }
+
+  else if(name === "Başarılarım"){
+
+    content = `
+
+      <p>
+        Ders, konu ve sınav bazındaki gelişim
+        burada gösterilecek.
+      </p>
+
+    `;
+
+  }
+
+  else{
+
+    content = `
+
+      <p>
+        ${name} sistemi hazırlanıyor.
+      </p>
+
+      <p>
+        Bu alan ders kitabındaki konularla
+        bağlantılı çalışacak.
+      </p>
+
+    `;
+
+  }
+
+  document.getElementById("featureContent").innerHTML =
+    content;
+
+}
+
+
+function openParent(){
+
+  hideAll();
+
+  document
+    .getElementById("parentPage")
+    .classList.remove("hidden");
+
+  document.getElementById("headerText").innerText =
+    "Veli kontrol merkezi";
+
+}
+
+
+function goProfiles(){
+
+  currentClass = null;
+
+  hideAll();
+
+  document
+    .getElementById("profilePage")
+    .classList.remove("hidden");
+
+  document.getElementById("headerText").innerText =
+    "Kişisel öğrenme ve çalışma asistanın";
+
+}
+
+
+function goHome(){
+
+  if(currentClass){
+
+    selectStudent(currentClass);
+
+  }else{
+
+    goProfiles();
+
+  }
+
+}
+
+</script>
+
+</body>
+  </html>
