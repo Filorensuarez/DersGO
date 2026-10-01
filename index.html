@@ -8,9 +8,7 @@
 <title>DersGO</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
@@ -19,9 +17,7 @@ body{
   color:#172033;
 }
 
-button{
-  font:inherit;
-}
+button{font:inherit}
 
 .header{
   background:linear-gradient(135deg,#3157d5,#6336c7);
@@ -77,10 +73,6 @@ button{
   cursor:pointer;
 }
 
-.profile:hover{
-  border-color:#3157d5;
-}
-
 .profile .icon{
   font-size:38px;
   margin-bottom:8px;
@@ -118,10 +110,16 @@ button{
 .subject{
   border:0;
   border-radius:15px;
-  padding:17px 10px;
+  padding:18px 10px;
   cursor:pointer;
   font-weight:bold;
   background:#f7f8fc;
+}
+
+.subject .subject-icon{
+  display:block;
+  font-size:27px;
+  margin-bottom:7px;
 }
 
 .task{
@@ -185,13 +183,7 @@ button{
   line-height:1.6;
 }
 
-.hidden{
-  display:none;
-}
-
-.student-name{
-  font-weight:bold;
-}
+.hidden{display:none}
 
 .stats{
   display:grid;
@@ -212,6 +204,13 @@ button{
   color:#3157d5;
 }
 
+.unit{
+  border:1px solid #e5e9f5;
+  border-radius:14px;
+  padding:14px;
+  margin-top:10px;
+}
+
 .footer{
   text-align:center;
   color:#8a92a3;
@@ -220,13 +219,8 @@ button{
 }
 
 @media(max-width:400px){
-  .container{
-    padding:13px;
-  }
-
-  .menu{
-    min-height:95px;
-  }
+  .container{padding:13px}
+  .menu{min-height:95px}
 }
 </style>
 </head>
@@ -235,9 +229,7 @@ button{
 
 <header class="header">
   <h1>DersGO</h1>
-  <p id="headerText">
-    Kişisel öğrenme ve çalışma asistanın
-  </p>
+  <p id="headerText">Kişisel öğrenme ve çalışma asistanın</p>
 </header>
 
 <main class="container">
@@ -266,6 +258,7 @@ button{
 
   <div class="card">
     <div class="title">Veli Alanı</div>
+
     <p class="empty">
       İki öğrencinin çalışma sürelerini, sınavlarını,
       başarılarını ve eksik konularını buradan takip edebilirsiniz.
@@ -286,27 +279,28 @@ button{
   </button>
 
   <div class="card">
+
     <span class="badge" id="classBadge"></span>
 
-    <h2>
-      Merhaba
-    </h2>
+    <h2>Bugünkü Çalışmam</h2>
 
     <p>
-      Bugünkü çalışmalarını tamamlamaya hazır mısın?
+      Günlük çalışmalarını tamamlamaya hazır mısın?
     </p>
 
     <div class="progress">
-      <div id="dailyProgress"></div>
+      <div></div>
     </div>
 
     <p>
       <small>Bugünkü hedefinin %35'i tamamlandı.</small>
     </p>
+
   </div>
 
 
   <div class="card">
+
     <div class="title">Bugünkü Görevlerim</div>
 
     <div class="task">
@@ -323,17 +317,21 @@ button{
       <span>Günlük tekrar</span>
       <span class="badge">10 dk</span>
     </div>
+
   </div>
 
 
   <div class="card">
+
     <div class="title">Derslerim</div>
 
     <div class="subject-grid" id="subjects"></div>
+
   </div>
 
 
   <div class="card">
+
     <div class="title">Öğrenme Merkezi</div>
 
     <div class="menu-grid">
@@ -391,9 +389,11 @@ button{
   </button>
 
   <div class="card">
+
     <div class="title" id="featureTitle"></div>
 
     <div id="featureContent" class="empty"></div>
+
   </div>
 
 </section>
@@ -407,16 +407,15 @@ button{
 
   <div class="card">
     <div class="title">Veli Paneli</div>
-
-    <p>
-      İki öğrencinin gelişim bilgileri burada görüntülenecek.
-    </p>
+    <p>İki öğrencinin gelişimi burada takip edilecek.</p>
   </div>
 
   <div class="card">
+
     <div class="title">3. Sınıf</div>
 
     <div class="stats">
+
       <div class="stat">
         <strong>0</strong>
         Soru
@@ -431,13 +430,17 @@ button{
         <strong>0</strong>
         XP
       </div>
+
     </div>
+
   </div>
 
   <div class="card">
+
     <div class="title">6. Sınıf</div>
 
     <div class="stats">
+
       <div class="stat">
         <strong>0</strong>
         Soru
@@ -452,7 +455,9 @@ button{
         <strong>0</strong>
         XP
       </div>
+
     </div>
+
   </div>
 
 </section>
@@ -464,30 +469,13 @@ button{
 </div>
 
 
+<!-- ÖNCE DERS VERİLERİNİ YÜKLÜYORUZ -->
+<script src="data.js"></script>
+
 <script>
 
 let currentClass = null;
-
-const subjects = {
-
-  3:[
-    "Türkçe",
-    "Matematik",
-    "Hayat Bilgisi",
-    "Fen Bilimleri",
-    "İngilizce"
-  ],
-
-  6:[
-    "Türkçe",
-    "Matematik",
-    "Fen Bilimleri",
-    "Sosyal Bilgiler",
-    "İngilizce",
-    "Din Kültürü"
-  ]
-
-};
+let currentSubject = null;
 
 
 function hideAll(){
@@ -533,17 +521,35 @@ function loadSubjects(){
 
   area.innerHTML = "";
 
-  subjects[currentClass].forEach(subject=>{
+  if(
+    typeof dersGOData === "undefined" ||
+    !dersGOData[currentClass]
+  ){
+
+    area.innerHTML =
+      "<p>Ders verileri yüklenemedi.</p>";
+
+    return;
+  }
+
+  const lessonList =
+    dersGOData[currentClass].dersler;
+
+  lessonList.forEach(ders => {
 
     const button =
       document.createElement("button");
 
     button.className = "subject";
 
-    button.innerText = subject;
+    button.innerHTML =
+      '<span class="subject-icon">' +
+      ders.ikon +
+      '</span>' +
+      ders.ad;
 
     button.onclick = function(){
-      openSubject(subject);
+      openSubject(ders.id);
     };
 
     area.appendChild(button);
@@ -553,7 +559,32 @@ function loadSubjects(){
 }
 
 
-function openSubject(subject){
+function findSubject(subjectID){
+
+  if(!currentClass){
+    return null;
+  }
+
+  const lessonList =
+    dersGOData[currentClass].dersler;
+
+  return lessonList.find(
+    ders => ders.id === subjectID
+  );
+
+}
+
+
+function openSubject(subjectID){
+
+  const ders =
+    findSubject(subjectID);
+
+  if(!ders){
+    return;
+  }
+
+  currentSubject = subjectID;
 
   hideAll();
 
@@ -562,35 +593,65 @@ function openSubject(subject){
     .classList.remove("hidden");
 
   document.getElementById("featureTitle").innerText =
-    subject;
+    ders.ikon + " " + ders.ad;
+
+  let unitHTML = "";
+
+  if(ders.uniteler.length === 0){
+
+    unitHTML = `
+      <div class="unit">
+        <strong>Ders kitabı henüz eklenmedi.</strong>
+
+        <p>
+          Bu derse ait PDF ders kitabını eklediğimizde
+          üniteler ve konular burada görüntülenecek.
+        </p>
+      </div>
+    `;
+
+  }else{
+
+    ders.uniteler.forEach(unite => {
+
+      unitHTML += `
+        <div class="unit">
+          <strong>${unite.ad}</strong>
+        </div>
+      `;
+
+    });
+
+  }
 
   document.getElementById("featureContent").innerHTML = `
 
     <p>
-      <b>${currentClass}. sınıf ${subject}</b>
+      ${currentClass}. sınıf ${ders.ad}
     </p>
 
-    <p>
-      Bu bölümde ders kitabındaki üniteler ve
-      konular yer alacak.
-    </p>
+    ${unitHTML}
 
-    <button class="primary"
+    <button
+      class="primary"
       onclick="openFeature('Konu Çalış')">
       Konu Çalış
     </button>
 
-    <button class="primary"
+    <button
+      class="primary"
       onclick="openFeature('Konu Anlatım Videoları')">
       Konu Anlatım Videosu
     </button>
 
-    <button class="primary"
+    <button
+      class="primary"
       onclick="openFeature('Test Çöz')">
       Test Çöz
     </button>
 
-    <button class="primary"
+    <button
+      class="primary"
       onclick="openFeature('Eğitim Oyunları')">
       Oyunla Pekiştir
     </button>
@@ -613,124 +674,154 @@ function openFeature(name){
 
   let content = "";
 
+
   if(name === "Ders Kitaplarım"){
 
     content = `
 
       <p>
-        Ders kitaplarının PDF dosyalarını kullanacağımız
-        bölüm burası olacak.
+        Ders kitaplarının PDF dosyaları bu bölümle
+        ilişkilendirilecek.
       </p>
 
       <p>
-        Sonraki aşamada PDF → ünite → konu → test
-        sistemini buraya bağlayacağız.
+        Kitaptaki ünite ve konuları DersGO'nun
+        ders yapısına aktaracağız.
       </p>
 
     `;
 
   }
+
 
   else if(name === "Konu Anlatım Videoları"){
 
     content = `
 
       <p>
-        Öğrencinin sınıfına, dersine ve konusuna uygun
-        konu anlatım videoları burada bulunacak.
+        Seçilen ders ve konuya uygun konu anlatım
+        videoları burada gösterilecek.
       </p>
 
       <p>
-        Video bittikten sonra mini öğrenme testi
-        başlatılabilecek.
+        Video tamamlandıktan sonra kısa bir öğrenme
+        kontrol testi yapılabilecek.
       </p>
 
     `;
 
   }
+
 
   else if(name === "Eğitim Oyunları"){
 
     content = `
 
       <p>
-        Ders konularına bağlı eğitim oyunları burada
-        bulunacak.
+        Öğrencinin çalıştığı konuyla ilgili
+        eğitim oyunları burada bulunacak.
       </p>
 
       <p>
-        Doğru cevaplarla XP ve başarı puanı
-        kazanılabilecek.
+        Oyunlarda kazanılan sonuçlar öğrencinin
+        gelişim kaydına işlenecek.
       </p>
 
     `;
 
   }
+
 
   else if(name === "Sınava Hazırlan"){
 
     content = `
 
       <p>
-        Sınav tarihi ve sınav konuları girilecek.
+        Sınav tarihi ve sınav kapsamındaki
+        konular buradan seçilecek.
       </p>
 
       <p>
-        DersGO kalan süreye göre günlük çalışma
-        programı oluşturacak.
+        DersGO kalan günlere göre çalışma,
+        tekrar ve deneme programı hazırlayacak.
       </p>
 
     `;
 
   }
+
 
   else if(name === "Yanlışlarım"){
 
     content = `
 
       <p>
-        Öğrencinin yanlış yaptığı sorular burada
-        saklanacak.
+        Yanlış cevaplanan sorular ve zorlanılan
+        konular burada saklanacak.
       </p>
 
       <p>
-        DersGO zorlanılan konuları tekrar çalışma
-        programına ekleyecek.
+        Bu konular sonraki çalışma programlarında
+        tekrar öğrencinin karşısına çıkarılacak.
       </p>
 
     `;
 
   }
+
 
   else if(name === "Başarılarım"){
 
     content = `
 
       <p>
-        Ders, konu ve sınav bazındaki gelişim
+        Ders ve konu bazındaki başarı oranları
         burada gösterilecek.
+      </p>
+
+      <p>
+        Öğrencinin zaman içerisindeki gelişimi
+        takip edilecek.
       </p>
 
     `;
 
   }
+
+
+  else if(name === "Test Çöz"){
+
+    content = `
+
+      <p>
+        Ders kitabındaki konulara bağlı testler
+        burada çözülecek.
+      </p>
+
+      <p>
+        Çoktan seçmeli, doğru-yanlış,
+        boşluk doldurma ve eşleştirme soruları
+        ekleyeceğiz.
+      </p>
+
+    `;
+
+  }
+
 
   else{
 
     content = `
 
       <p>
-        ${name} sistemi hazırlanıyor.
-      </p>
-
-      <p>
-        Bu alan ders kitabındaki konularla
-        bağlantılı çalışacak.
+        ${name} bölümü ders kitabındaki
+        konularla bağlantılı çalışacak.
       </p>
 
     `;
 
   }
+
 
   document.getElementById("featureContent").innerHTML =
     content;
@@ -743,47 +834,4 @@ function openParent(){
   hideAll();
 
   document
-    .getElementById("parentPage")
-    .classList.remove("hidden");
-
-  document.getElementById("headerText").innerText =
-    "Veli kontrol merkezi";
-
-}
-
-
-function goProfiles(){
-
-  currentClass = null;
-
-  hideAll();
-
-  document
-    .getElementById("profilePage")
-    .classList.remove("hidden");
-
-  document.getElementById("headerText").innerText =
-    "Kişisel öğrenme ve çalışma asistanın";
-
-}
-
-
-function goHome(){
-
-  if(currentClass){
-
-    selectStudent(currentClass);
-
-  }else{
-
-    goProfiles();
-
-  }
-
-}
-
-</script>
-  <script src="data.js"></script>
-
-</body>
-  </html>
+    .getElementById("parentPage
