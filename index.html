@@ -939,9 +939,9 @@ function openTopic(unitID, topicIndex){
     </div>
 
     <button class="primary"
-            onclick="openFeature('Konu Çalış')">
-      Konuyu Öğren
-    </button>
+        onclick="startLesson('${unitID}', ${topicIndex})">
+  Konuyu Öğren
+</button>
 
     <button class="primary"
             onclick="openFeature('Konu Anlatım Videoları')">
@@ -961,7 +961,215 @@ function openTopic(unitID, topicIndex){
   `;
 
 }
+function startLesson(unitID, topicIndex){
 
+  const ders = findSubject(currentSubject);
+
+  if(!ders) return;
+
+  const unite = ders.uniteler.find(
+    u => u.id === unitID
+  );
+
+  if(!unite || !unite.konular[topicIndex]) return;
+
+  const konu = unite.konular[topicIndex];
+
+  hideAll();
+
+  document
+    .getElementById("featurePage")
+    .classList.remove("hidden");
+
+  document.getElementById("featureTitle").innerText =
+    "Dersi Öğren";
+
+  if(unitID === "tema1" && topicIndex === 0){
+
+    document.getElementById("featureContent").innerHTML = `
+
+      <p>
+        <span class="badge">6. Sınıf Matematik</span>
+      </p>
+
+      <h2>${konu}</h2>
+
+      <div class="unit">
+        <strong>1. Kat Nedir?</strong>
+
+        <p>
+          Bir doğal sayıyı 1, 2, 3, 4, ... sayılarıyla
+          sırayla çarptığımızda o doğal sayının katlarını
+          elde ederiz.
+        </p>
+
+        <p>
+          Örneğin 7'nin katları:
+        </p>
+
+        <p>
+          7 × 1 = 7<br>
+          7 × 2 = 14<br>
+          7 × 3 = 21<br>
+          7 × 4 = 28<br>
+          7 × 5 = 35
+        </p>
+
+        <p>
+          Yani 7, 14, 21, 28, 35, ... sayıları
+          7'nin katlarıdır.
+        </p>
+      </div>
+
+
+      <div class="unit">
+        <strong>Önemli Bilgi</strong>
+
+        <p>
+          Bir doğal sayının katları sonsuza kadar devam eder.
+        </p>
+
+        <p>
+          Sıfırdan farklı bir doğal sayının en küçük pozitif
+          katı sayının kendisidir.
+        </p>
+      </div>
+
+
+      <div class="unit">
+        <strong>2. Ortak Kat Nedir?</strong>
+
+        <p>
+          İki doğal sayının katları arasında ortak olan
+          sayılara bu sayıların ortak katları denir.
+        </p>
+
+        <p>
+          2'nin katları:<br>
+          2, 4, 6, 8, 10, 12, 14, 16, 18...
+        </p>
+
+        <p>
+          3'ün katları:<br>
+          3, 6, 9, 12, 15, 18...
+        </p>
+
+        <p>
+          Ortak katları:<br>
+          <strong>6, 12, 18, ...</strong>
+        </p>
+      </div>
+
+
+      <div class="unit">
+        <strong>Şimdi Sen Dene</strong>
+
+        <p>
+          4 sayısının ilk beş pozitif katı hangisidir?
+        </p>
+
+        <button class="primary"
+                onclick="checkLessonAnswer(1)">
+          4, 8, 12, 16, 20
+        </button>
+
+        <button class="primary"
+                onclick="checkLessonAnswer(2)">
+          4, 6, 8, 10, 12
+        </button>
+
+        <button class="primary"
+                onclick="checkLessonAnswer(3)">
+          1, 2, 3, 4, 5
+        </button>
+
+        <div id="lessonResult"
+             style="margin-top:15px"></div>
+      </div>
+
+
+      <div class="unit">
+        <strong>Ortak Kat Sorusu</strong>
+
+        <p>
+          4 ve 6'nın 30'dan küçük ortak katları hangileridir?
+        </p>
+
+        <button class="primary"
+                onclick="checkCommonMultiple(1)">
+          12 ve 24
+        </button>
+
+        <button class="primary"
+                onclick="checkCommonMultiple(2)">
+          6, 12 ve 18
+        </button>
+
+        <button class="primary"
+                onclick="checkCommonMultiple(3)">
+          8, 16 ve 24
+        </button>
+
+        <div id="commonResult"
+             style="margin-top:15px"></div>
+      </div>
+
+    `;
+
+  }else{
+
+    document.getElementById("featureContent").innerHTML = `
+      <div class="unit">
+        <strong>${konu}</strong>
+        <p>
+          Bu konunun ders içeriği sırayla eklenecek.
+        </p>
+      </div>
+    `;
+
+  }
+
+}
+
+
+function checkLessonAnswer(answer){
+
+  const area =
+    document.getElementById("lessonResult");
+
+  if(answer === 1){
+
+    area.innerHTML =
+      "Doğru. 4'ün katları 4'er artar: 4, 8, 12, 16, 20.";
+
+  }else{
+
+    area.innerHTML =
+      "Tekrar düşün. 4 × 1 ile başlayıp her adımda 4 eklemeyi dene.";
+
+  }
+
+}
+
+
+function checkCommonMultiple(answer){
+
+  const area =
+    document.getElementById("commonResult");
+
+  if(answer === 1){
+
+    area.innerHTML =
+      "Doğru. 4 ve 6'nın 30'dan küçük ortak katları 12 ve 24'tür.";
+
+  }else{
+
+    area.innerHTML =
+      "Tekrar dene. Önce 4'ün ve 6'nın katlarını ayrı ayrı yaz, sonra ortak olanları bul.";
+
+  }
+
+}
 function openParent(){
 
   hideAll();
