@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#3157d5">
-
 <title>DersGO</title>
 
 <style>
@@ -26,15 +25,8 @@ button{font:inherit}
   border-radius:0 0 28px 28px;
 }
 
-.header h1{
-  margin:0;
-  font-size:29px;
-}
-
-.header p{
-  margin:7px 0 0;
-  opacity:.9;
-}
+.header h1{margin:0;font-size:29px}
+.header p{margin:7px 0 0;opacity:.9}
 
 .container{
   max-width:800px;
@@ -56,9 +48,7 @@ button{font:inherit}
   margin-bottom:14px;
 }
 
-.profile-grid,
-.menu-grid,
-.subject-grid{
+.profile-grid,.menu-grid,.subject-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:12px;
@@ -73,19 +63,9 @@ button{font:inherit}
   cursor:pointer;
 }
 
-.profile .icon{
-  font-size:38px;
-  margin-bottom:8px;
-}
-
-.profile strong{
-  display:block;
-  font-size:18px;
-}
-
-.profile small{
-  color:#6b7280;
-}
+.profile .icon{font-size:38px;margin-bottom:8px}
+.profile strong{display:block;font-size:18px}
+.profile small{color:#6b7280}
 
 .menu{
   border:0;
@@ -103,9 +83,7 @@ button{font:inherit}
   margin-bottom:8px;
 }
 
-.menu strong{
-  font-size:14px;
-}
+.menu strong{font-size:14px}
 
 .subject{
   border:0;
@@ -130,10 +108,6 @@ button{font:inherit}
   gap:10px;
 }
 
-.task:last-child{
-  border-bottom:0;
-}
-
 .badge{
   display:inline-block;
   background:#e9eeff;
@@ -154,7 +128,6 @@ button{font:inherit}
 .progress div{
   height:100%;
   background:#3157d5;
-  width:35%;
 }
 
 .back{
@@ -176,6 +149,10 @@ button{font:inherit}
   cursor:pointer;
   width:100%;
   margin-top:10px;
+}
+
+.primary:disabled{
+  opacity:.65;
 }
 
 .empty{
@@ -209,6 +186,23 @@ button{font:inherit}
   border-radius:14px;
   padding:14px;
   margin-top:10px;
+  line-height:1.6;
+}
+
+.good{
+  background:#edf9f0;
+  border:1px solid #b9e2c2;
+  padding:12px;
+  border-radius:12px;
+  margin-top:12px;
+}
+
+.bad{
+  background:#fff3f3;
+  border:1px solid #efc2c2;
+  padding:12px;
+  border-radius:12px;
+  margin-top:12px;
 }
 
 .footer{
@@ -228,994 +222,649 @@ button{font:inherit}
 <body>
 
 <header class="header">
-  <h1>DersGO</h1>
-  <p id="headerText">Kişisel öğrenme ve çalışma asistanın</p>
+<h1>DersGO</h1>
+<p id="headerText">Kişisel öğrenme ve çalışma asistanın</p>
 </header>
 
 <main class="container">
 
 <section id="profilePage">
 
-  <div class="card">
-    <div class="title">Kim çalışacak?</div>
+<div class="card">
+<div class="title">Kim çalışacak?</div>
 
-    <div class="profile-grid">
+<div class="profile-grid">
 
-      <button class="profile" onclick="selectStudent(3)">
-        <div class="icon">📘</div>
-        <strong>3. Sınıf</strong>
-        <small>Öğrenci Profili</small>
-      </button>
+<button class="profile" onclick="selectStudent(3)">
+<div class="icon">📘</div>
+<strong>3. Sınıf</strong>
+<small>Öğrenci Profili</small>
+</button>
 
-      <button class="profile" onclick="selectStudent(6)">
-        <div class="icon">🎓</div>
-        <strong>6. Sınıf</strong>
-        <small>Öğrenci Profili</small>
-      </button>
+<button class="profile" onclick="selectStudent(6)">
+<div class="icon">🎓</div>
+<strong>6. Sınıf</strong>
+<small>Öğrenci Profili</small>
+</button>
 
-    </div>
-  </div>
+</div>
+</div>
 
-  <div class="card">
-    <div class="title">Veli Alanı</div>
+<div class="card">
+<div class="title">Veli Alanı</div>
 
-    <p class="empty">
-      İki öğrencinin çalışma sürelerini, sınavlarını,
-      başarılarını ve eksik konularını buradan takip edebilirsiniz.
-    </p>
+<p class="empty">
+İki öğrencinin testlerini, başarılarını,
+yanlışlarını ve XP puanlarını takip edebilirsiniz.
+</p>
 
-    <button class="primary" onclick="openParent()">
-      Veli Panelini Aç
-    </button>
-  </div>
+<button class="primary" onclick="openParent()">
+Veli Panelini Aç
+</button>
+</div>
 
 </section>
 
 
 <section id="homePage" class="hidden">
 
-  <button class="back" onclick="goProfiles()">
-    ← Profil değiştir
-  </button>
+<button class="back" onclick="goProfiles()">← Profil değiştir</button>
 
-  <div class="card">
+<div class="card">
 
-    <span class="badge" id="classBadge"></span>
+<span class="badge" id="classBadge"></span>
 
-    <h2>Bugünkü Çalışmam</h2>
+<h2>Bugünkü Çalışmam</h2>
 
-    <p>
-      Günlük çalışmalarını tamamlamaya hazır mısın?
-    </p>
+<p>Günlük çalışmalarını tamamlamaya hazır mısın?</p>
 
-    <div class="progress">
-      <div></div>
-    </div>
+<div class="progress">
+<div id="dailyProgress" style="width:0%"></div>
+</div>
 
-    <p>
-      <small>Bugünkü hedefinin %35'i tamamlandı.</small>
-    </p>
+<p id="dailyText">
+<small>Çalışmaya başlamak için bir ders seç.</small>
+</p>
 
-  </div>
+</div>
 
 
-  <div class="card">
+<div class="card">
 
-    <div class="title">Bugünkü Görevlerim</div>
+<div class="title">Bugünkü Görevlerim</div>
 
-    <div class="task">
-      <span>Matematik konu tekrarı</span>
-      <span class="badge">20 dk</span>
-    </div>
+<div class="task">
+<span>Matematik konu tekrarı</span>
+<span class="badge">20 dk</span>
+</div>
 
-    <div class="task">
-      <span>Türkçe soru çözümü</span>
-      <span class="badge">15 dk</span>
-    </div>
+<div class="task">
+<span>Türkçe soru çözümü</span>
+<span class="badge">15 dk</span>
+</div>
 
-    <div class="task">
-      <span>Günlük tekrar</span>
-      <span class="badge">10 dk</span>
-    </div>
+<div class="task">
+<span>Günlük tekrar</span>
+<span class="badge">10 dk</span>
+</div>
 
-  </div>
-
-
-  <div class="card">
-
-    <div class="title">Derslerim</div>
-
-    <div class="subject-grid" id="subjects"></div>
-
-  </div>
+</div>
 
 
-  <div class="card">
+<div class="card">
 
-    <div class="title">Öğrenme Merkezi</div>
+<div class="title">Derslerim</div>
+<div class="subject-grid" id="subjects"></div>
 
-    <div class="menu-grid">
+</div>
 
-      <button class="menu" onclick="openFeature('Konu Çalış')">
-        <span class="icon">📖</span>
-        <strong>Konu Çalış</strong>
-      </button>
 
-      <button class="menu" onclick="openFeature('Konu Anlatım Videoları')">
-        <span class="icon">▶️</span>
-        <strong>Konu Videoları</strong>
-      </button>
+<div class="card">
 
-      <button class="menu" onclick="openFeature('Test Çöz')">
-        <span class="icon">📝</span>
-        <strong>Test Çöz</strong>
-      </button>
+<div class="title">Öğrenme Merkezi</div>
 
-      <button class="menu" onclick="openFeature('Eğitim Oyunları')">
-        <span class="icon">🎮</span>
-        <strong>Oyun Oyna</strong>
-      </button>
+<div class="menu-grid">
 
-      <button class="menu" onclick="openFeature('Sınava Hazırlan')">
-        <span class="icon">🎯</span>
-        <strong>Sınava Hazırlan</strong>
-      </button>
+<button class="menu" onclick="showInfo('Konu Çalış')">
+<span class="icon">📖</span>
+<strong>Konu Çalış</strong>
+</button>
 
-      <button class="menu" onclick="openFeature('Yanlışlarım')">
-        <span class="icon">🔁</span>
-        <strong>Yanlışlarım</strong>
-      </button>
+<button class="menu" onclick="showInfo('Konu Videoları')">
+<span class="icon">▶️</span>
+<strong>Konu Videoları</strong>
+</button>
 
-      <button class="menu" onclick="openFeature('Başarılarım')">
-        <span class="icon">🏆</span>
-        <strong>Başarılarım</strong>
-      </button>
+<button class="menu" onclick="showInfo('Test Merkezi')">
+<span class="icon">📝</span>
+<strong>Test Çöz</strong>
+</button>
 
-      <button class="menu" onclick="openFeature('Ders Kitaplarım')">
-        <span class="icon">📚</span>
-        <strong>Ders Kitaplarım</strong>
-      </button>
+<button class="menu" onclick="showInfo('Oyun Merkezi')">
+<span class="icon">🎮</span>
+<strong>Oyun Oyna</strong>
+</button>
 
-    </div>
-  </div>
+<button class="menu" onclick="showInfo('Sınava Hazırlan')">
+<span class="icon">🎯</span>
+<strong>Sınava Hazırlan</strong>
+</button>
+
+<button class="menu" onclick="showWrongs()">
+<span class="icon">🔁</span>
+<strong>Yanlışlarım</strong>
+</button>
+
+<button class="menu" onclick="showSuccess()">
+<span class="icon">🏆</span>
+<strong>Başarılarım</strong>
+</button>
+
+<button class="menu" onclick="showInfo('Ders Kitaplarım')">
+<span class="icon">📚</span>
+<strong>Ders Kitaplarım</strong>
+</button>
+
+</div>
+</div>
 
 </section>
 
 
 <section id="featurePage" class="hidden">
 
-  <button class="back" onclick="goHome()">
-    ← Ana sayfa
-  </button>
+<button class="back" onclick="goHome()">← Ana sayfa</button>
 
-  <div class="card">
+<div class="card">
 
-    <div class="title" id="featureTitle"></div>
+<div class="title" id="featureTitle"></div>
+<div id="featureContent" class="empty"></div>
 
-    <div id="featureContent" class="empty"></div>
-
-  </div>
+</div>
 
 </section>
 
 
 <section id="parentPage" class="hidden">
 
-  <button class="back" onclick="goProfiles()">
-    ← Geri
-  </button>
+<button class="back" onclick="goProfiles()">← Geri</button>
 
-  <div class="card">
-    <div class="title">Veli Paneli</div>
-    <p>İki öğrencinin gelişimi burada takip edilecek.</p>
-  </div>
+<div class="card">
+<div class="title">Veli Kontrol Merkezi</div>
+<p>Öğrencilerin DersGO içindeki çalışmalarının özeti.</p>
+</div>
 
-  <div class="card">
+<div class="card">
+<div class="title">3. Sınıf</div>
+<div class="stats" id="parentStats3"></div>
+<div id="parentExtra3"></div>
+</div>
 
-    <div class="title">3. Sınıf</div>
-
-    <div class="stats">
-
-      <div class="stat">
-        <strong>0</strong>
-        Soru
-      </div>
-
-      <div class="stat">
-        <strong>0</strong>
-        Test
-      </div>
-
-      <div class="stat">
-        <strong>0</strong>
-        XP
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="card">
-
-    <div class="title">6. Sınıf</div>
-
-    <div class="stats">
-
-      <div class="stat">
-        <strong>0</strong>
-        Soru
-      </div>
-
-      <div class="stat">
-        <strong>0</strong>
-        Test
-      </div>
-
-      <div class="stat">
-        <strong>0</strong>
-        XP
-      </div>
-
-    </div>
-
-  </div>
+<div class="card">
+<div class="title">6. Sınıf</div>
+<div class="stats" id="parentStats6"></div>
+<div id="parentExtra6"></div>
+</div>
 
 </section>
 
 </main>
 
 <div class="footer">
-  DersGO • Öğren • Uygula • Pekiştir
+DersGO • Öğren • Uygula • Pekiştir
 </div>
 
-
-<!-- ÖNCE DERS VERİLERİNİ YÜKLÜYORUZ -->
-<script src="data.js?v=2"></script>
+<script src="data.js?v=20"></script>
 
 <script>
 
-let currentClass = null;
-let currentSubject = null;
+let currentClass=null;
+let currentSubject=null;
+
+let currentUnit=null;
+let currentTopic=null;
+
+let activeTest=null;
+let testIndex=0;
+let testCorrect=0;
+let testAnswers=[];
 
 
 function hideAll(){
 
-  document.getElementById("profilePage").classList.add("hidden");
-  document.getElementById("homePage").classList.add("hidden");
-  document.getElementById("featurePage").classList.add("hidden");
-  document.getElementById("parentPage").classList.add("hidden");
+["profilePage","homePage","featurePage","parentPage"]
+.forEach(id=>{
+document.getElementById(id).classList.add("hidden");
+});
+
+}
+
+
+function progressKey(cls){
+
+return "dersgoProgress_"+cls;
+
+}
+
+
+function blankProgress(){
+
+return{
+xp:0,
+tests:0,
+questions:0,
+correct:0,
+wrong:[],
+scores:{},
+games:0
+};
+
+}
+
+
+function getProgress(cls=currentClass){
+
+try{
+
+const saved=JSON.parse(
+localStorage.getItem(progressKey(cls))
+);
+
+return Object.assign(blankProgress(),saved||{});
+
+}catch(e){
+
+return blankProgress();
+
+}
+
+}
+
+
+function saveProgress(data){
+
+if(!currentClass)return;
+
+localStorage.setItem(
+progressKey(currentClass),
+JSON.stringify(data)
+);
 
 }
 
 
 function selectStudent(classNumber){
 
-  currentClass = classNumber;
+currentClass=classNumber;
 
-  localStorage.setItem(
-    "dersgoStudent",
-    classNumber
-  );
+localStorage.setItem(
+"dersgoStudent",
+classNumber
+);
 
-  hideAll();
+hideAll();
 
-  document
-    .getElementById("homePage")
-    .classList.remove("hidden");
+document
+.getElementById("homePage")
+.classList.remove("hidden");
 
-  document.getElementById("classBadge").innerText =
-    classNumber + ". Sınıf";
+document.getElementById("classBadge").innerText=
+classNumber+". Sınıf";
 
-  document.getElementById("headerText").innerText =
-    classNumber + ". sınıf öğrenme merkezi";
+document.getElementById("headerText").innerText=
+classNumber+". sınıf öğrenme merkezi";
 
-  loadSubjects();
+loadSubjects();
+updateHomeProgress();
+
+}
+
+
+function updateHomeProgress(){
+
+const p=getProgress();
+
+const level=Math.min(
+100,
+Math.round(p.xp/5)
+);
+
+document.getElementById("dailyProgress").style.width=
+level+"%";
+
+document.getElementById("dailyText").innerHTML=
+"<small>Toplam "+p.xp+
+" XP • "+p.tests+
+" test tamamlandı.</small>";
 
 }
 
 
 function loadSubjects(){
 
-  const area =
-    document.getElementById("subjects");
+const area=document.getElementById("subjects");
 
-  area.innerHTML = "";
+area.innerHTML="";
 
-  if(
-    typeof dersGOData === "undefined" ||
-    !dersGOData[currentClass]
-  ){
+if(
+typeof dersGOData==="undefined" ||
+!dersGOData[currentClass]
+){
 
-    area.innerHTML =
-      "<p>Ders verileri yüklenemedi.</p>";
+area.innerHTML="<p>Ders verileri yüklenemedi.</p>";
+return;
 
-    return;
-  }
+}
 
-  const lessonList =
-    dersGOData[currentClass].dersler;
+dersGOData[currentClass].dersler.forEach(ders=>{
 
-  lessonList.forEach(ders => {
+const button=document.createElement("button");
 
-    const button =
-      document.createElement("button");
+button.className="subject";
 
-    button.className = "subject";
+button.innerHTML=
+'<span class="subject-icon">'+
+ders.ikon+
+'</span>'+
+ders.ad;
 
-    button.innerHTML =
-      '<span class="subject-icon">' +
-      ders.ikon +
-      '</span>' +
-      ders.ad;
+button.onclick=()=>openSubject(ders.id);
 
-    button.onclick = function(){
-      openSubject(ders.id);
-    };
+area.appendChild(button);
 
-    area.appendChild(button);
-
-  });
+});
 
 }
 
 
 function findSubject(subjectID){
 
-  if(!currentClass){
-    return null;
-  }
+if(!currentClass)return null;
 
-  const lessonList =
-    dersGOData[currentClass].dersler;
+if(
+typeof dersGOData==="undefined" ||
+!dersGOData[currentClass]
+)return null;
 
-  return lessonList.find(
-    ders => ders.id === subjectID
-  );
+return dersGOData[currentClass].dersler.find(
+d=>d.id===subjectID
+);
 
 }
 
 
 function openSubject(subjectID){
 
-  const ders =
-    findSubject(subjectID);
+const ders=findSubject(subjectID);
 
-  if(!ders){
-    return;
-  }
+if(!ders)return;
 
-  currentSubject = subjectID;
+currentSubject=subjectID;
 
-  hideAll();
+hideAll();
 
-  document
-    .getElementById("featurePage")
-    .classList.remove("hidden");
+document
+.getElementById("featurePage")
+.classList.remove("hidden");
 
-  document.getElementById("featureTitle").innerText =
-    ders.ikon + " " + ders.ad;
+document.getElementById("featureTitle").innerText=
+ders.ikon+" "+ders.ad;
 
-  let unitHTML = "";
+let html=
+"<p>"+currentClass+". sınıf "+ders.ad+"</p>";
 
-  if(ders.uniteler.length === 0){
+if(!ders.uniteler || ders.uniteler.length===0){
 
-    unitHTML = `
-      <div class="unit">
-        <strong>Ders kitabı henüz eklenmedi.</strong>
+html+=`
+<div class="unit">
+<strong>Ders içeriği hazırlanıyor.</strong>
+<p>
+Bu dersin kitabı sisteme işlendiğinde
+tema ve konular burada görüntülenecek.
+</p>
+</div>
+`;
 
-        <p>
-          Bu derse ait PDF ders kitabını eklediğimizde
-          üniteler ve konular burada görüntülenecek.
-        </p>
-      </div>
-    `;
+}else{
 
-  }else{
+ders.uniteler.forEach(unite=>{
 
-    ders.uniteler.forEach(unite => {
+html+=`
+<div class="unit"
+onclick="openUnit('${unite.id}')"
+style="cursor:pointer">
 
-  unitHTML += `
-    <div class="unit"
-         onclick="openUnit('${unite.id}')"
-         style="cursor:pointer">
+<strong>${unite.ad}</strong>
 
-      <strong>${unite.ad}</strong>
+<div style="margin-top:8px;color:#3157d5">
+Konuları aç →
+</div>
 
-      <div style="margin-top:8px;color:#3157d5;font-size:14px">
-        Konuları aç →
-      </div>
-
-    </div>
-  `;
+</div>
+`;
 
 });
 
-  }
+}
 
-  document.getElementById("featureContent").innerHTML = `
-
-    <p>
-      ${currentClass}. sınıf ${ders.ad}
-    </p>
-
-    ${unitHTML}
-
-    <button
-      class="primary"
-      onclick="openFeature('Konu Çalış')">
-      Konu Çalış
-    </button>
-
-    <button
-      class="primary"
-      onclick="openFeature('Konu Anlatım Videoları')">
-      Konu Anlatım Videosu
-    </button>
-
-    <button
-      class="primary"
-      onclick="openFeature('Test Çöz')">
-      Test Çöz
-    </button>
-
-    <button
-      class="primary"
-      onclick="openFeature('Eğitim Oyunları')">
-      Oyunla Pekiştir
-    </button>
-
-  `;
+document.getElementById("featureContent").innerHTML=html;
 
 }
 
 
-function openFeature(name){
-
-  hideAll();
-
-  document
-    .getElementById("featurePage")
-    .classList.remove("hidden");
-
-  document.getElementById("featureTitle").innerText =
-    name;
-
-  let content = "";
-
-
-  if(name === "Ders Kitaplarım"){
-
-    content = `
-
-      <p>
-        Ders kitaplarının PDF dosyaları bu bölümle
-        ilişkilendirilecek.
-      </p>
-
-      <p>
-        Kitaptaki ünite ve konuları DersGO'nun
-        ders yapısına aktaracağız.
-      </p>
-
-    `;
-
-  }
-
-
-  else if(name === "Konu Anlatım Videoları"){
-
-    content = `
-
-      <p>
-        Seçilen ders ve konuya uygun konu anlatım
-        videoları burada gösterilecek.
-      </p>
-
-      <p>
-        Video tamamlandıktan sonra kısa bir öğrenme
-        kontrol testi yapılabilecek.
-      </p>
-
-    `;
-
-  }
-
-
-  else if(name === "Eğitim Oyunları"){
-
-    content = `
-
-      <p>
-        Öğrencinin çalıştığı konuyla ilgili
-        eğitim oyunları burada bulunacak.
-      </p>
-
-      <p>
-        Oyunlarda kazanılan sonuçlar öğrencinin
-        gelişim kaydına işlenecek.
-      </p>
-
-    `;
-
-  }
-
-
-  else if(name === "Sınava Hazırlan"){
-
-    content = `
-
-      <p>
-        Sınav tarihi ve sınav kapsamındaki
-        konular buradan seçilecek.
-      </p>
-
-      <p>
-        DersGO kalan günlere göre çalışma,
-        tekrar ve deneme programı hazırlayacak.
-      </p>
-
-    `;
-
-  }
-
-
-  else if(name === "Yanlışlarım"){
-
-    content = `
-
-      <p>
-        Yanlış cevaplanan sorular ve zorlanılan
-        konular burada saklanacak.
-      </p>
-
-      <p>
-        Bu konular sonraki çalışma programlarında
-        tekrar öğrencinin karşısına çıkarılacak.
-      </p>
-
-    `;
-
-  }
-
-
-  else if(name === "Başarılarım"){
-
-    content = `
-
-      <p>
-        Ders ve konu bazındaki başarı oranları
-        burada gösterilecek.
-      </p>
-
-      <p>
-        Öğrencinin zaman içerisindeki gelişimi
-        takip edilecek.
-      </p>
-
-    `;
-
-  }
-
-
-  else if(name === "Test Çöz"){
-
-    content = `
-
-      <p>
-        Ders kitabındaki konulara bağlı testler
-        burada çözülecek.
-      </p>
-
-      <p>
-        Çoktan seçmeli, doğru-yanlış,
-        boşluk doldurma ve eşleştirme soruları
-        ekleyeceğiz.
-      </p>
-
-    `;
-
-  }
-
-
-  else{
-
-    content = `
-
-      <p>
-        ${name} bölümü ders kitabındaki
-        konularla bağlantılı çalışacak.
-      </p>
-
-    `;
-
-  }
-
-
-  document.getElementById("featureContent").innerHTML =
-    content;
-
-}
 function openUnit(unitID){
 
-  const ders = findSubject(currentSubject);
+const ders=findSubject(currentSubject);
 
-  if(!ders){
-    return;
-  }
+if(!ders)return;
 
-  const unite = ders.uniteler.find(
-    u => u.id === unitID
-  );
+const unite=ders.uniteler.find(
+u=>u.id===unitID
+);
 
-  if(!unite){
-    return;
-  }
+if(!unite)return;
 
-  hideAll();
+currentUnit=unitID;
 
-  document
-    .getElementById("featurePage")
-    .classList.remove("hidden");
+hideAll();
 
-  document.getElementById("featureTitle").innerText =
-    unite.ad;
+document
+.getElementById("featurePage")
+.classList.remove("hidden");
 
-  let konuHTML = "";
+document.getElementById("featureTitle").innerText=
+unite.ad;
 
-  if(!unite.konular || unite.konular.length === 0){
+let html="";
 
-    konuHTML = `
-      <p>Bu temaya henüz konu eklenmedi.</p>
-    `;
+if(!unite.konular || unite.konular.length===0){
 
-  }else{
+html="<p>Bu temaya henüz konu eklenmedi.</p>";
 
-    unite.konular.forEach((konu, index) => {
+}else{
 
-      konuHTML += `
-        <div class="unit"
-             onclick="openTopic('${unitID}', ${index})"
-             style="cursor:pointer">
+unite.konular.forEach((konu,index)=>{
 
-          <strong>${index + 1}. ${konu}</strong>
+html+=`
+<div class="unit"
+onclick="openTopic('${unitID}',${index})"
+style="cursor:pointer">
 
-          <div style="margin-top:8px;color:#3157d5;font-size:14px">
-            Konuyu çalış →
-          </div>
+<strong>${index+1}. ${konu}</strong>
 
-        </div>
-      `;
+<div style="margin-top:8px;color:#3157d5">
+Konuyu çalış →
+</div>
 
-    });
+</div>
+`;
 
-  }
+});
 
-  document.getElementById("featureContent").innerHTML =
-    konuHTML;
+}
+
+document.getElementById("featureContent").innerHTML=html;
 
 }
 
 
-function openTopic(unitID, topicIndex){
+function openTopic(unitID,topicIndex){
 
-  const ders = findSubject(currentSubject);
+const ders=findSubject(currentSubject);
 
-  if(!ders){
-    return;
-  }
+if(!ders)return;
 
-  const unite = ders.uniteler.find(
-    u => u.id === unitID
-  );
+const unite=ders.uniteler.find(
+u=>u.id===unitID
+);
 
-  if(!unite || !unite.konular[topicIndex]){
-    return;
-  }
+if(!unite || !unite.konular[topicIndex])return;
 
-  const konu = unite.konular[topicIndex];
+const konu=unite.konular[topicIndex];
 
-  hideAll();
+currentUnit=unitID;
+currentTopic=topicIndex;
 
-  document
-    .getElementById("featurePage")
-    .classList.remove("hidden");
+hideAll();
 
-  document.getElementById("featureTitle").innerText =
-    konu;
+document
+.getElementById("featurePage")
+.classList.remove("hidden");
 
-  document.getElementById("featureContent").innerHTML = `
+document.getElementById("featureTitle").innerText=konu;
 
-    <p>
-      <span class="badge">${unite.ad}</span>
-    </p>
+const score=getProgress().scores[
+topicKey(unitID,topicIndex)
+];
 
-    <div class="unit">
-      <strong>${konu}</strong>
+let durum="";
 
-      <p>
-        Bu konu için ders kitabına uygun öğrenme
-        içeriği hazırlanacak.
-      </p>
-    </div>
+if(typeof score==="number"){
 
-    <button class="primary"
-        onclick="startLesson('${unitID}', ${topicIndex})">
-  Konuyu Öğren
+durum=`
+<div class="unit">
+Son test sonucu:
+<strong>%${score}</strong>
+—
+${score>=80 ? "Başarılı" : "Tekrar Et"}
+</div>
+`;
+
+}
+
+document.getElementById("featureContent").innerHTML=`
+
+<p>
+<span class="badge">${unite.ad}</span>
+</p>
+
+${durum}
+
+<button class="primary"
+onclick="startLesson('${unitID}',${topicIndex})">
+Konuyu Öğren
 </button>
 
-    <button class="primary"
-            onclick="openFeature('Konu Anlatım Videoları')">
-      Konu Anlatım Videosu
-    </button>
+<button class="primary"
+onclick="showVideo('${unitID}',${topicIndex})">
+Konu Anlatım Videosu
+</button>
 
-    <button class="primary"
-            onclick="openFeature('Test Çöz')">
-      Test Çöz
-    </button>
+<button class="primary"
+onclick="startTopicTest('${unitID}',${topicIndex})">
+Test Çöz
+</button>
 
-    <button class="primary"
-            onclick="openFeature('Eğitim Oyunları')">
-      Oyunla Pekiştir
-    </button>
+<button class="primary"
+onclick="startTopicGame('${unitID}',${topicIndex})">
+Oyunla Pekiştir
+</button>
 
-  `;
-
-}
-function startLesson(unitID, topicIndex){
-
-  const ders = findSubject(currentSubject);
-
-  if(!ders) return;
-
-  const unite = ders.uniteler.find(
-    u => u.id === unitID
-  );
-
-  if(!unite || !unite.konular[topicIndex]) return;
-
-  const konu = unite.konular[topicIndex];
-
-  hideAll();
-
-  document
-    .getElementById("featurePage")
-    .classList.remove("hidden");
-
-  document.getElementById("featureTitle").innerText =
-    "Dersi Öğren";
-
-  if(unitID === "tema1" && topicIndex === 0){
-
-    document.getElementById("featureContent").innerHTML = `
-
-      <p>
-        <span class="badge">6. Sınıf Matematik</span>
-      </p>
-
-      <h2>${konu}</h2>
-
-      <div class="unit">
-        <strong>1. Kat Nedir?</strong>
-
-        <p>
-          Bir doğal sayıyı 1, 2, 3, 4, ... sayılarıyla
-          sırayla çarptığımızda o doğal sayının katlarını
-          elde ederiz.
-        </p>
-
-        <p>
-          Örneğin 7'nin katları:
-        </p>
-
-        <p>
-          7 × 1 = 7<br>
-          7 × 2 = 14<br>
-          7 × 3 = 21<br>
-          7 × 4 = 28<br>
-          7 × 5 = 35
-        </p>
-
-        <p>
-          Yani 7, 14, 21, 28, 35, ... sayıları
-          7'nin katlarıdır.
-        </p>
-      </div>
-
-
-      <div class="unit">
-        <strong>Önemli Bilgi</strong>
-
-        <p>
-          Bir doğal sayının katları sonsuza kadar devam eder.
-        </p>
-
-        <p>
-          Sıfırdan farklı bir doğal sayının en küçük pozitif
-          katı sayının kendisidir.
-        </p>
-      </div>
-
-
-      <div class="unit">
-        <strong>2. Ortak Kat Nedir?</strong>
-
-        <p>
-          İki doğal sayının katları arasında ortak olan
-          sayılara bu sayıların ortak katları denir.
-        </p>
-
-        <p>
-          2'nin katları:<br>
-          2, 4, 6, 8, 10, 12, 14, 16, 18...
-        </p>
-
-        <p>
-          3'ün katları:<br>
-          3, 6, 9, 12, 15, 18...
-        </p>
-
-        <p>
-          Ortak katları:<br>
-          <strong>6, 12, 18, ...</strong>
-        </p>
-      </div>
-
-
-      <div class="unit">
-        <strong>Şimdi Sen Dene</strong>
-
-        <p>
-          4 sayısının ilk beş pozitif katı hangisidir?
-        </p>
-
-        <button class="primary"
-                onclick="checkLessonAnswer(1)">
-          4, 8, 12, 16, 20
-        </button>
-
-        <button class="primary"
-                onclick="checkLessonAnswer(2)">
-          4, 6, 8, 10, 12
-        </button>
-
-        <button class="primary"
-                onclick="checkLessonAnswer(3)">
-          1, 2, 3, 4, 5
-        </button>
-
-        <div id="lessonResult"
-             style="margin-top:15px"></div>
-      </div>
-
-
-      <div class="unit">
-        <strong>Ortak Kat Sorusu</strong>
-
-        <p>
-          4 ve 6'nın 30'dan küçük ortak katları hangileridir?
-        </p>
-
-        <button class="primary"
-                onclick="checkCommonMultiple(1)">
-          12 ve 24
-        </button>
-
-        <button class="primary"
-                onclick="checkCommonMultiple(2)">
-          6, 12 ve 18
-        </button>
-
-        <button class="primary"
-                onclick="checkCommonMultiple(3)">
-          8, 16 ve 24
-        </button>
-
-        <div id="commonResult"
-             style="margin-top:15px"></div>
-      </div>
-
-    `;
-
-  }else{
-
-    document.getElementById("featureContent").innerHTML = `
-      <div class="unit">
-        <strong>${konu}</strong>
-        <p>
-          Bu konunun ders içeriği sırayla eklenecek.
-        </p>
-      </div>
-    `;
-
-  }
+`;
 
 }
 
 
-function checkLessonAnswer(answer){
+function topicKey(unitID,topicIndex){
 
-  const area =
-    document.getElementById("lessonResult");
-
-  if(answer === 1){
-
-    area.innerHTML =
-      "Doğru. 4'ün katları 4'er artar: 4, 8, 12, 16, 20.";
-
-  }else{
-
-    area.innerHTML =
-      "Tekrar düşün. 4 × 1 ile başlayıp her adımda 4 eklemeyi dene.";
-
-  }
+return currentClass+"|"+
+currentSubject+"|"+
+unitID+"|"+
+topicIndex;
 
 }
 
 
-function checkCommonMultiple(answer){
+/* =========================
+   KONU ANLATIMI
+========================= */
 
-  const area =
-    document.getElementById("commonResult");
+function startLesson(unitID,topicIndex){
 
-  if(answer === 1){
+const ders=findSubject(currentSubject);
 
-    area.innerHTML =
-      "Doğru. 4 ve 6'nın 30'dan küçük ortak katları 12 ve 24'tür.";
+if(!ders)return;
 
-  }else{
+const unite=ders.uniteler.find(
+u=>u.id===unitID
+);
 
-    area.innerHTML =
-      "Tekrar dene. Önce 4'ün ve 6'nın katlarını ayrı ayrı yaz, sonra ortak olanları bul.";
+if(!unite || !unite.konular[topicIndex])return;
 
-  }
+const konu=unite.konular[topicIndex];
 
-}
-function openParent(){
+hideAll();
 
-  hideAll();
+document
+.getElementById("featurePage")
+.classList.remove("hidden");
 
-  document
-    .getElementById("parentPage")
-    .classList.remove("hidden");
-
-  document.getElementById("headerText").innerText =
-    "Veli kontrol merkezi";
-
-}
+document.getElementById("featureTitle").innerText=
+"Dersi Öğren";
 
 
-function goProfiles(){
+if(
+currentClass===6 &&
+currentSubject==="matematik" &&
+unitID==="tema1" &&
+topicIndex===0
+){
 
-  currentClass = null;
-  currentSubject = null;
+document.getElementById("featureContent").innerHTML=`
 
-  hideAll();
+<span class="badge">6. Sınıf Matematik</span>
 
-  document
-    .getElementById("profilePage")
-    .classList.remove("hidden");
+<h2>${konu}</h2>
 
-  document.getElementById("headerText").innerText =
-    "Kişisel öğrenme ve çalışma asistanın";
+<div class="unit">
 
-}
+<strong>1. Kat Nedir?</strong>
+
+<p>
+Bir doğal sayıyı 1, 2, 3, 4, ... doğal sayılarıyla
+çarptığımızda o sayının pozitif katlarını elde ederiz.
+</p>
+
+<p>
+Örneğin 7'nin ilk beş pozitif katı:
+</p>
+
+<p>
+7 × 1 = 7<br>
+7 × 2 = 14<br>
+7 × 3 = 21<br>
+7 × 4 = 28<br>
+7 × 5 = 35
+</p>
+
+<p>
+Buna göre 7, 14, 21, 28 ve 35 sayıları
+7'nin katlarıdır.
+</p>
+
+</div>
 
 
-function goHome(){
+<div class="unit">
 
-  if(currentClass){
-
-    selectStudent(currentClass);
-
-  }else{
-
-    goProfiles();
-
-  }
-
-}
-
-</script>
-
-</body>
-</html>
+<strong>Önemli
