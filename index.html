@@ -614,13 +614,21 @@ function openSubject(subjectID){
 
     ders.uniteler.forEach(unite => {
 
-      unitHTML += `
-        <div class="unit">
-          <strong>${unite.ad}</strong>
-        </div>
-      `;
+  unitHTML += `
+    <div class="unit"
+         onclick="openUnit('${unite.id}')"
+         style="cursor:pointer">
 
-    });
+      <strong>${unite.ad}</strong>
+
+      <div style="margin-top:8px;color:#3157d5;font-size:14px">
+        Konuları aç →
+      </div>
+
+    </div>
+  `;
+
+});
 
   }
 
@@ -827,7 +835,132 @@ function openFeature(name){
     content;
 
 }
+function openUnit(unitID){
 
+  const ders = findSubject(currentSubject);
+
+  if(!ders){
+    return;
+  }
+
+  const unite = ders.uniteler.find(
+    u => u.id === unitID
+  );
+
+  if(!unite){
+    return;
+  }
+
+  hideAll();
+
+  document
+    .getElementById("featurePage")
+    .classList.remove("hidden");
+
+  document.getElementById("featureTitle").innerText =
+    unite.ad;
+
+  let konuHTML = "";
+
+  if(!unite.konular || unite.konular.length === 0){
+
+    konuHTML = `
+      <p>Bu temaya henüz konu eklenmedi.</p>
+    `;
+
+  }else{
+
+    unite.konular.forEach((konu, index) => {
+
+      konuHTML += `
+        <div class="unit"
+             onclick="openTopic('${unitID}', ${index})"
+             style="cursor:pointer">
+
+          <strong>${index + 1}. ${konu}</strong>
+
+          <div style="margin-top:8px;color:#3157d5;font-size:14px">
+            Konuyu çalış →
+          </div>
+
+        </div>
+      `;
+
+    });
+
+  }
+
+  document.getElementById("featureContent").innerHTML =
+    konuHTML;
+
+}
+
+
+function openTopic(unitID, topicIndex){
+
+  const ders = findSubject(currentSubject);
+
+  if(!ders){
+    return;
+  }
+
+  const unite = ders.uniteler.find(
+    u => u.id === unitID
+  );
+
+  if(!unite || !unite.konular[topicIndex]){
+    return;
+  }
+
+  const konu = unite.konular[topicIndex];
+
+  hideAll();
+
+  document
+    .getElementById("featurePage")
+    .classList.remove("hidden");
+
+  document.getElementById("featureTitle").innerText =
+    konu;
+
+  document.getElementById("featureContent").innerHTML = `
+
+    <p>
+      <span class="badge">${unite.ad}</span>
+    </p>
+
+    <div class="unit">
+      <strong>${konu}</strong>
+
+      <p>
+        Bu konu için ders kitabına uygun öğrenme
+        içeriği hazırlanacak.
+      </p>
+    </div>
+
+    <button class="primary"
+            onclick="openFeature('Konu Çalış')">
+      Konuyu Öğren
+    </button>
+
+    <button class="primary"
+            onclick="openFeature('Konu Anlatım Videoları')">
+      Konu Anlatım Videosu
+    </button>
+
+    <button class="primary"
+            onclick="openFeature('Test Çöz')">
+      Test Çöz
+    </button>
+
+    <button class="primary"
+            onclick="openFeature('Eğitim Oyunları')">
+      Oyunla Pekiştir
+    </button>
+
+  `;
+
+}
 
 function openParent(){
 
