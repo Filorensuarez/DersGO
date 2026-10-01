@@ -834,4 +834,47 @@ function openParent(){
   hideAll();
 
   document
-    .getElementById("parentPage
+    .getElementById("parentPage")
+    .classList.remove("hidden");
+
+  document.getElementById("headerText").innerText =
+    "Veli kontrol merkezi";
+
+}
+
+
+function goProfiles(){
+
+  currentClass = null;
+  currentSubject = null;
+
+  hideAll();
+
+  document
+    .getElementById("profilePage")
+    .classList.remove("hidden");
+
+  document.getElementById("headerText").innerText =
+    "Kişisel öğrenme ve çalışma asistanın";
+
+}
+
+
+function goHome(){
+
+  if(currentClass){
+
+    selectStudent(currentClass);
+
+  }else{
+
+    goProfiles();
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
